@@ -5,61 +5,73 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     padding: 20,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   header: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
   },
-  button: {
-    backgroundColor: '#D32F2F',
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 10,
+
+  // Buttons
+  buttonContainer: {
+    width: '100%',
     alignItems: 'center',
-    marginTop: 20,
+    justifyContent: 'center',
+    gap: 15,
+  },
+  menuButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#D32F2F',
+    paddingVertical: 15,
+    width: '90%',
+    borderRadius: 12,
+  },
+  emergencyButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#B71C1C', // Darker red for emergency
+    paddingVertical: 15,
+    width: '90%',
+    borderRadius: 12,
   },
   buttonText: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
+    marginLeft: 10,
   },
+  
 
-  // EmergencyScreen Styles
-  emergencyButton: {
-    backgroundColor: "#D32F2F",
-    padding: 15,
-    borderRadius: 10,
-    width: 200,
-    alignItems: "center",
-    marginBottom: 15,
-  },
+  // Emergency Screen Styles
   safeButton: {
-    backgroundColor: "#388E3C",
+    backgroundColor: '#388E3C',
     padding: 15,
     borderRadius: 10,
     width: 200,
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 20,
   },
   callingContainer: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   countdown: {
     fontSize: 48,
-    fontWeight: "bold",
-    color: "#000",
+    fontWeight: 'bold',
+    color: '#000',
   },
   callingText: {
     fontSize: 18,
-    color: "#000",
+    color: '#000',
     marginTop: 10,
   },
 
-  // Medicine List Styles
+  // Medication List
   medItem: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -83,6 +95,14 @@ const styles = StyleSheet.create({
     color: '#777',
     marginTop: 20,
   },
+  deleteButton: {
+    padding: 10,
+    borderRadius: 8,
+    backgroundColor: '#D32F2F',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  
 
   // Modal Styles
   modalContainer: {
@@ -110,12 +130,12 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     paddingVertical: 5,
     fontSize: 16,
-  },
-  buttonRow: {
+  },buttonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-  },
+    marginTop: 20, // Add space above buttons
+  },  
   cancelButton: {
     backgroundColor: '#777',
     paddingVertical: 12,
@@ -125,6 +145,13 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 10,
   },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  
 });
 
 export default styles;

@@ -1,15 +1,21 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { NavigationProp } from '@react-navigation/native';
 import styles from '../styles/styles';
 
-const SettingsScreen = ({ navigation }) => {
+interface SettingsScreenProps {
+  navigation: NavigationProp<any>;
+}
+
+const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Settings</Text>
 
-      <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
-        <Text style={styles.buttonText}>Back to Home</Text>
-      </TouchableOpacity>
+    <TouchableOpacity style={styles.menuButton} onPress={() => navigation.goBack()}>
+      <Text style={styles.buttonText}>Back to Home</Text>
+    </TouchableOpacity>
+
     </View>
   );
 };

@@ -12,6 +12,7 @@ import CheckBox from 'expo-checkbox';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import styles from '../styles/styles';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface Medication {
   id: number;
@@ -44,7 +45,7 @@ const MedicationScreen = () => {
     const requestPermissions = async () => {
       const { status } = await Notifications.requestPermissionsAsync();
       if (status !== 'granted') {
-        Alert.alert('Permission Denied', 'Please enable notifications to receive medication reminders.');
+        Alert.alert('Permission Denied', 'Enable notifications for medication reminders.');
       }
     };
     requestPermissions();
@@ -78,17 +79,21 @@ const MedicationScreen = () => {
 
   const scheduleNotification = async (med: Medication) => {
     const nextTime = getNextMedicationTime(med.time);
+  
     await Notifications.scheduleNotificationAsync({
       content: {
         title: 'Medication Reminder 💊',
-        body: `It's time to take ${med.name}, ${med.dosage}.`,
+        body: `Time to take ${med.name}, ${med.dosage}.`,
       },
-      trigger: { seconds: nextTime / 1000 },
+      trigger: {
+        seconds: nextTime / 1000,
+        repeats: false,
+      } as Notifications.TimeIntervalTriggerInput,
     });
   };
 
   const handleDelete = (id: number) => {
-    Alert.alert('Delete Medication', 'Are you sure you want to delete this medication?', [
+    Alert.alert('Delete Medication', 'Are you sure?', [
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'Delete',
@@ -102,7 +107,7 @@ const MedicationScreen = () => {
 
   const handleAddMedication = () => {
     if (!medName || !medDosage || !medTime) {
-      Alert.alert('Error', 'Please enter all medication details.');
+      Alert.alert('Error', 'Enter all medication details.');
       return;
     }
     const newMedication: Medication = {
@@ -123,6 +128,7 @@ const MedicationScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Medications</Text>
+
       {medications.length === 0 ? (
         <Text style={styles.noMedsText}>No medications scheduled.</Text>
       ) : (
@@ -140,15 +146,18 @@ const MedicationScreen = () => {
                 {`${item.name}, ${item.dosage} - ${item.time}`}
               </Text>
               <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.id)}>
-                <Text style={styles.deleteButtonText}>delete</Text>
+                <Icon name="trash-can" size={24} color="white" />
               </TouchableOpacity>
             </View>
           )}
         />
       )}
-      <TouchableOpacity style={styles.button} onPress={() => setModalVisible(true)}>
-        <Text style={styles.buttonText}>+ Add Medication</Text>
+
+      <TouchableOpacity style={styles.menuButton} onPress={() => setModalVisible(true)}>
+        <Icon name="plus-circle" size={30} color="white" />
+        <Text style={styles.buttonText}>Add Medication</Text>
       </TouchableOpacity>
+
       <Modal visible={modalVisible} animationType="slide" transparent={true}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
@@ -156,14 +165,23 @@ const MedicationScreen = () => {
             <TextInput style={styles.input} placeholder="Medication Name" value={medName} onChangeText={setMedName} />
             <TextInput style={styles.input} placeholder="Dosage (mg/tablets)" value={medDosage} onChangeText={setMedDosage} />
             <TextInput style={styles.input} placeholder="Time (HH:MM)" value={medTime} onChangeText={setMedTime} />
+
             <View style={styles.buttonRow}>
-              <TouchableOpacity style={styles.cancelButton} onPress={() => setModalVisible(false)}>
+              <TouchableOpacity 
+                style={[styles.cancelButton, { flex: 1, alignItems: 'center' }]} 
+                onPress={() => setModalVisible(false)}
+              >
                 <Text style={styles.buttonText}>Cancel</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={handleAddMedication}>
-                <Text style={styles.buttonText}>Save</Text>
-              </TouchableOpacity>
-            </View>
+  
+              <TouchableOpacity 
+                style={[styles.menuButton, { flex: 1, alignItems: 'center' }]} 
+                onPress={handleAddMedication}
+              >
+    <Text style={styles.buttonText}>Save</Text>
+  </TouchableOpacity>
+</View>
+
           </View>
         </View>
       </Modal>
