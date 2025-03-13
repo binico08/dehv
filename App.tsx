@@ -1,10 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Auth from './components/Auth'; 
 
 export default function App() {
   return (
     <View style={styles.container}>
+      <Text>Hello! How may I help you today?</Text>
       <Text>Open up App.tsx to start working on your app!</Text>
+      <Auth />
       <StatusBar style="auto" />
     </View>
   );
