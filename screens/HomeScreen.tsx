@@ -1,23 +1,14 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RouteProp } from '@react-navigation/native';
-import styles from '../styles/styles';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import styles from "../styles/styles";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { RootStackParamList } from "../navigation/AppNavigator"; 
 
-type RootStackParamList = {
-  Companion: undefined;
-  Medication: undefined;
-  Emergency: undefined;
-  Settings: undefined;
-};
-
-type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Companion'>;
-type HomeScreenRouteProp = RouteProp<RootStackParamList, 'Companion'>;
+type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, "Home">;
 
 interface Props {
   navigation: HomeScreenNavigationProp;
-  route: HomeScreenRouteProp;
 }
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
@@ -26,22 +17,22 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
       <Text style={styles.header}>Home</Text>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.menuButton} onPress={() => navigation.navigate('Companion')}>
+        <TouchableOpacity style={styles.menuButton} onPress={() => navigation.navigate("Companion")}>
           <Icon name="account-group" size={30} color="white" />
           <Text style={styles.buttonText}>Call Companion</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.menuButton} onPress={() => navigation.navigate('Medication')}>
+        <TouchableOpacity style={styles.menuButton} onPress={() => navigation.navigate("Medication")}>
           <Icon name="pill" size={30} color="white" />
           <Text style={styles.buttonText}>Medications</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.emergencyButton} onPress={() => navigation.navigate('Emergency')}>
+        <TouchableOpacity style={styles.emergencyButton} onPress={() => navigation.navigate("Emergency")}>
           <Icon name="alert" size={30} color="white" />
           <Text style={styles.buttonText}>Emergency</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.menuButton} onPress={() => navigation.navigate('Settings')}>
+        <TouchableOpacity style={styles.menuButton} onPress={() => navigation.navigate("Settings")}>
           <Icon name="cog" size={30} color="white" />
           <Text style={styles.buttonText}>Settings</Text>
         </TouchableOpacity>
