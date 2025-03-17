@@ -1,23 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Auth from './components/Auth'; 
+import React from "react";
+import { View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import AppNavigator from "./lola/navigation/AppNavigator";
+import appStyles from "./styles/appStyles"; // Ensure correct path
+import { supabase } from "./lib/supabase"; // Import Supabase client
 
-export default function App() {
+const App: React.FC = () => {
   return (
-    <View style={styles.container}>
-      <Text>Hello! How may I help you today?</Text>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <Auth />
-      <StatusBar style="auto" />
+    <View style={{ flex: 1 }}> 
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
